@@ -7,7 +7,6 @@ import { fetchCardData, fetchLatestInvoices, fetchRevenue } from '../lib/data';
 
 // const lusitana = DM_Sans({ subsets: ['latin'], weight: ['400', '700'] });
 export default async function Page() {
-    const revenue = await fetchRevenue()
     const latestInvoices = await fetchLatestInvoices()
     const { numberOfInvoices, numberOfCustomers, totalPaidInvoices, totalPendingInvoices } = await fetchCardData()
     return (
@@ -26,7 +25,6 @@ export default async function Page() {
         />
             </div>
             <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-                <RevenueChart revenue={revenue} />
                 <LatestInvoices latestInvoices={latestInvoices} />
             </div>
         </main>
