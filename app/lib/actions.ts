@@ -27,12 +27,15 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' })
 
 export type State = {
     errors?: {
-        customerId?: string[];
-        amount?: string[];
-        status?: string[];
+        fieldErrors?: {
+            customerId?: string[];
+            amount?: string[];
+            status?: string[];
+        };
+        formErrors?: string[];
     };
     message?: string | null;
-} | undefined;
+};
 
 export async function createInvoice(prevState: State, formData: FormData) {
 
