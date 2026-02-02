@@ -27,7 +27,7 @@ export function UpdateInvoice({ id }: { id: string }) {
   );
 }
 
-export function DeleteInvoice({ id }: { id: string }) {
+export default function DeleteInvoice({ id }: { id: string }) {
    const initialState: State = {
     message: null,
     errors: {},
