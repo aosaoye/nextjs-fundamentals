@@ -1,8 +1,7 @@
 import '@/app/ui/global.css';
-import { Inter, Geist } from 'next/font/google';
+import { DM_Sans } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
-const geis = Geist({ subsets: ['latin'] });
+const dmSans = DM_Sans({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
@@ -11,7 +10,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${dmSans.className} antialiased`}>{children}</body>
     </html>
   );
 }
