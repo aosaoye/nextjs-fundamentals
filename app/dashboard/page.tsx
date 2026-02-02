@@ -2,6 +2,8 @@ import { Card } from '@/app/ui/dashboard/cards';
 import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { fetchCardData, fetchLatestInvoices, fetchRevenue } from '../lib/data';
+import { Suspense } from 'react';
+import { RevenueChartSkeleton, LatestInvoicesSkeleton } from '../ui/skeletons';
 // import { DM_Sans } from 'next/font/google';
 
 
@@ -25,7 +27,12 @@ export default async function Page() {
         />
             </div>
             <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-                <LatestInvoices latestInvoices={latestInvoices} />
+                <Suspense fallback={<RevenueChartSkeleton />}>
+                    <RevenueChart />
+                </Suspense>
+                <Suspense fallback={<LatestInvoicesSkeleton />}>
+                    <LatestInvoices latestInvoices={latestInvoices} />
+                </Suspense>
             </div>
         </main>
     );
