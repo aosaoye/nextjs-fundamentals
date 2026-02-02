@@ -1,4 +1,4 @@
-import { lusitana } from '@/app/ui/fonts';
+import {Lusitana} from 'next/font/google';
 import {
   AtSymbolIcon,
   KeyIcon,
@@ -6,6 +6,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
+
+const lusitana = Lusitana({ subsets: ['latin'], weight: ['400', '700'] });
+
 
 export default function LoginForm() {
   return (
