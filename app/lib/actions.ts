@@ -23,16 +23,16 @@ const CreateInvoice = FormSchema.omit({
     data: true
 })
 
-const sql = postgres(process.env.POSTGRES_URL!, {ssl: 'require'})
+const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' })
 
 export type State = {
     errors?: {
-        customerId?: string[]
-        amount?: string[]
-        status?: string[]
-    }
-    message?: string | null
-}
+        customerId?: string[];
+        amount?: string[];
+        status?: string[];
+    };
+    message?: string | null;
+} | undefined;
 
 export async function createInvoice(prevState: State, formData: FormData) {
 
@@ -48,7 +48,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
         }
     }
 
-    const {customerId, amount, status} = validationFields.data
+    const { customerId, amount, status } = validationFields.data
     const amountInCents = Number(amount) * 100
     const date = new Date().toISOString().split('T')[0]
 
@@ -63,13 +63,13 @@ export async function createInvoice(prevState: State, formData: FormData) {
             message: 'Failed to create invoice',
         }
     }
-    
+
 
     revalidatePath('/dashboard/invoices')
     redirect('/dashboard/invoices')
 }
 
-export async function updateInvoice(id: string, prevState: State,  formData: FormData) {
+export async function updateInvoice(id: string, prevState: State, formData: FormData) {
     const validationFields = CreateInvoice.safeParse({
         customerId: formData.get('customerId'),
         amount: formData.get('amount'),
@@ -82,7 +82,7 @@ export async function updateInvoice(id: string, prevState: State,  formData: For
         }
     }
 
-    const {customerId, amount, status} = validationFields.data
+    const { customerId, amount, status } = validationFields.data
     const amountInCents = Number(amount) * 100
     const date = new Date().toISOString().split('T')[0]
 
@@ -107,12 +107,12 @@ export async function updateInvoice(id: string, prevState: State,  formData: For
     redirect('/dashboard/invoices')
 }
 
-export async function deleteInvoice(id: string, prevState: State) {
+export async function deleteInvoice(id: string) {
     try {
-       await sql`
+        await sql`
     DELETE FROM invoices
     WHERE id = ${id}
-    ` 
+    `
     } catch (error) {
         console.log(error)
         return {
